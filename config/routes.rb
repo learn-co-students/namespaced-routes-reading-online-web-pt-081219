@@ -4,8 +4,16 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index show new create edit update]
-
-  get '/admin/stats', to: 'stats#index'
+  
+  
+  namespace :admin do
+    resources :stats, only: [:index]
+  end
+  
+  # It is either use the one above or this one, but the aboce one is better
+  # scope '/admin', module: 'admin' do
+  #   resources :stats, only: [:index]
+  # end
 
   root 'posts#index'
 end
